@@ -2,7 +2,7 @@
  * @Author: wuchen
  * @Date: 2021-11-20 14:16:05
  * @LastEditors: wuchen
- * @LastEditTime: 2021-11-22 14:18:30
+ * @LastEditTime: 2021-12-24 11:24:05
  * @Description: 
  * @Email: rangowu@163.com
 -->
@@ -18,9 +18,8 @@
         >
         <div class="title-container">
             <h3 class="title">
-            {{ $t('login.title') }}
+            {{ login.title }}
             </h3>
-            <lang-select class="set-language" />
         </div>
 
         <el-form-item prop="username">
@@ -30,7 +29,7 @@
             <el-input
             ref="username"
             v-model="loginForm.username"
-            :placeholder="$t('login.username')"
+            :placeholder="login.username"
             name="username"
             type="text"
             tabindex="1"
@@ -53,7 +52,7 @@
                 ref="password"
                 v-model="loginForm.password"
                 :type="passwordType"
-                :placeholder="$t('login.password')"
+                :placeholder="login.password"
                 name="password"
                 tabindex="2"
                 autocomplete="on"
@@ -76,7 +75,7 @@
             style="width:100%; margin-bottom:30px;"
             @click.native.prevent="handleLogin"
         >
-            {{ $t('login.logIn') }}
+            {{ login.logIn }}
         </el-button>
 
         <div style="position:relative">
@@ -86,16 +85,16 @@
             type="primary"
             @click="showDialog=true"
             >
-            {{ $t('login.thirdparty') }}
+            {{ login.thirdparty }}
             </el-button>
         </div>
         </el-form>
 
         <el-dialog
-        :title="$t('login.thirdparty')"
+        :title="login.thirdparty"
         :visible.sync="showDialog"
         >
-        {{ $t('login.thirdpartyTips') }}
+        {{ login.thirdpartyTips }}
         <br>
         <br>
         <br>
@@ -106,6 +105,7 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
+import { Input } from 'element-ui';
 // import { Route } from 'vue-router';
 
 @Component({
@@ -136,10 +136,34 @@ export default class extends Vue {
         username: 'admin',
         password: '111111'
     }
+    private login = {
+        title: '系统登录',
+        logIn: '登录',
+        username: '账号',
+        password: '密码',
+        any: '随便填',
+        thirdparty: '第三方登录',
+        thirdpartyTips: '本地不能模拟，请结合自己业务进行模拟！！！'
+    }
+    private passwordType = 'password'
+    private showDialog = false
+    private loading = false
+    private capsTooltip = false
 
     private loginRules = {
         username: [{ validator: this.validateUsername, trigger: 'blur'}],
         password: [{ validator: this.validatePassword, trigger: 'blur'}]
+    }
+
+    private showPwd() {
+        if (this.passwordType === 'password') {
+            this.passwordType = ''
+        } else {
+            this.passwordType = 'password'
+        }
+        this.$nextTick(() => {
+            (this.$refs.password as Input).focus()
+        })
     }
 }
 </script>

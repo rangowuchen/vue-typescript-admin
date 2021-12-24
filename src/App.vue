@@ -2,7 +2,7 @@
  * @Author: wuchen
  * @Date: 2021-11-16 14:39:23
  * @LastEditors: wuchen
- * @LastEditTime: 2021-11-20 14:50:31
+ * @LastEditTime: 2021-12-24 11:13:37
  * @Description: 
  * @Email: rangowu@163.com
 -->
@@ -21,7 +21,7 @@ import { Component, Vue } from "vue-property-decorator";
 export default class App extends Vue {}
 </script>
 
-<style lang="less">
+<style lang="scss">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
